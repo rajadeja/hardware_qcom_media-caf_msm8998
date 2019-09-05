@@ -103,6 +103,8 @@ endif
 
 # Common Includes
 libmm-venc-inc      := $(LOCAL_PATH)/inc
+libmm-venc-inc      += $(call project-path-for,qcom-display)/libcopybit
+libmm-venc-inc      += $(call project-path-for,qcom-display)/gralloc
 libmm-venc-inc      += $(call project-path-for,qcom-media)/mm-video-v4l2/vidc/common/inc
 libmm-venc-inc      += $(call project-path-for,qcom-media)/mm-core/inc
 libmm-venc-inc      += $(call project-path-for,qcom-media)/libstagefrighthw
@@ -136,7 +138,7 @@ include $(CLEAR_VARS)
 LOCAL_MODULE                    := libOmxVenc
 LOCAL_MODULE_TAGS               := optional
 LOCAL_VENDOR_MODULE             := true
-LOCAL_CFLAGS                    := $(libmm-venc-def)
+LOCAL_CFLAGS                    := $(libmm-venc-def) -Wno-implicit-fallthrough
 
 LOCAL_HEADER_LIBRARIES := \
         media_plugin_headers \
@@ -144,6 +146,7 @@ LOCAL_HEADER_LIBRARIES := \
         libcutils_headers \
         libutils_headers \
         libhardware_headers \
+        display_headers \
 
 LOCAL_C_INCLUDES                := $(libmm-venc-inc)
 LOCAL_ADDITIONAL_DEPENDENCIES   := $(libmm-venc-add-dep)
